@@ -24,6 +24,18 @@ public class Teclado extends JPanel {
 
     public Teclado() {
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+        JPanel lineaPantalla = new JPanel();
+        lineaPantalla.setLayout(new BoxLayout(lineaPantalla, BoxLayout.X_AXIS));
+        pantalla = new JTextField();
+        pantalla.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
+        pantalla.setFont(new Font("Arial",Font.PLAIN,70));
+        
+        llamar = new JButton();
+        llamar.setMaximumSize(new Dimension(200, Integer.MAX_VALUE));
+        //llamar.setFont(new Font("Arial",Font.PLAIN,70));
+        llamar.setIcon(new javax.swing.ImageIcon(getClass().getResource("../images/call.png")));
+        lineaPantalla.add(llamar);
+        lineaPantalla.add(pantalla);
         JPanel linea1 = new JPanel();
         linea1.setLayout(new BoxLayout(linea1,BoxLayout.X_AXIS));
         uno = new JButton("1");
@@ -81,19 +93,11 @@ public class Teclado extends JPanel {
         numeral.setFont(new Font("Arial",Font.PLAIN,70));
         linea4.add(numeral);
 
-        pantalla = new JTextField();
-        pantalla.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
-        pantalla.setFont(new Font("Arial",Font.PLAIN,70));
-        add(pantalla);
+        add(lineaPantalla);
         add(linea1);
         add(linea2);
         add(linea3);
         add(linea4);
 
-        llamar = new JButton("LLamar");
-        llamar.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
-        llamar.setFont(new Font("Arial",Font.PLAIN,70));
-        //llamar.setIcon(new javax.swing.ImageIcon(getClass().getResource("../images/llamar.jpg")));
-        add(llamar);
     }
 }
