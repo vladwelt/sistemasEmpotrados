@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.Font;
 import java.awt.Dimension;
 import java.awt.Color;
+import java.awt.event.ActionListener;
 
 public class Teclado extends JPanel {
     
@@ -29,8 +30,7 @@ public class Teclado extends JPanel {
         pantalla = new JTextField();
         pantalla.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
         pantalla.setFont(new Font("Arial",Font.PLAIN,70));
-        
-        llamar = new JButton();
+        llamar = new JButton("");
         llamar.setMaximumSize(new Dimension(200, Integer.MAX_VALUE));
         //llamar.setFont(new Font("Arial",Font.PLAIN,70));
         llamar.setIcon(new javax.swing.ImageIcon(getClass().getResource("../images/call.png")));
@@ -98,6 +98,33 @@ public class Teclado extends JPanel {
         add(linea2);
         add(linea3);
         add(linea4);
+    }
 
+    public void addButtonListener(ActionListener listener) {
+        uno.addActionListener(listener);
+        dos.addActionListener(listener);
+        tres.addActionListener(listener);
+        cuatro.addActionListener(listener);
+        cinco.addActionListener(listener);
+        seis.addActionListener(listener);
+        siete.addActionListener(listener);
+        ocho.addActionListener(listener);
+        nueve.addActionListener(listener);
+        cero.addActionListener(listener);
+        asterisco.addActionListener(listener);
+        numeral.addActionListener(listener);
+    }
+
+    public void addLlamarListener(ActionListener listener) {
+        llamar.addActionListener(listener);
+    }
+
+    public void addTextInput(String text) {
+        String backup = pantalla.getText();
+        pantalla.setText(backup+text);
+    }
+
+    public String getNumeroPantalla() {
+        return pantalla.getText();
     }
 }

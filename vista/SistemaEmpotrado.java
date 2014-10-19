@@ -10,6 +10,8 @@ public class SistemaEmpotrado extends JFrame {
     private JButton buttonOne;
     private JButton buttonThree;
     private JButton buttonFive;
+    private Teclado teclado;
+    private Llamada llamada;
 
     public SistemaEmpotrado(String nombre) {
         super(nombre);
@@ -40,12 +42,29 @@ public class SistemaEmpotrado extends JFrame {
         buttonFive.addActionListener(listener);
     }
 
+    public void addLlamarActionListener(ActionListener listener) {
+        teclado.addLlamarListener(listener);
+    }
+
+    public void addPanelTeclado() {
+        getContentPane().removeAll();
+        teclado = new Teclado();
+        getContentPane().add(teclado);
+        this.revalidate();
+    }
+
+    public void addTecladoActionListener(ActionListener listener) {
+        teclado.addButtonListener(listener);
+    }
+
+    public void addText(String text) {
+        teclado.addTextInput(text);
+    }
+
     public void addPanelLlamada() {
         getContentPane().removeAll();
-        //this.repaint();
-        //this.validate();
-        Teclado teclado = new Teclado();
-        getContentPane().add(teclado);
+        llamada = new Llamada(teclado.getNumeroPantalla());
+        getContentPane().add(llamada);
         this.revalidate();
     }
 }
