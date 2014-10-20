@@ -22,20 +22,40 @@ public class Teclado extends JPanel {
     private JButton numeral;
     private JTextField pantalla;
     private JButton llamar;
+    private JButton borrar;
 
     public Teclado() {
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+
         JPanel lineaPantalla = new JPanel();
         lineaPantalla.setLayout(new BoxLayout(lineaPantalla, BoxLayout.X_AXIS));
         pantalla = new JTextField();
         pantalla.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
         pantalla.setFont(new Font("Arial",Font.PLAIN,70));
+
         llamar = new JButton("");
         llamar.setMaximumSize(new Dimension(200, Integer.MAX_VALUE));
         //llamar.setFont(new Font("Arial",Font.PLAIN,70));
-        llamar.setIcon(new javax.swing.ImageIcon(getClass().getResource("../images/call.png")));
+        llamar.setIcon(new javax.swing.ImageIcon(getClass().getResource("../images/call6.png")));
+
+        borrar = new JButton();
+        borrar.setIcon(new ImageIcon(getClass().getResource("../images/delete2.png")));
+        borrar.setBorderPainted(false);
+        borrar.setBackground(null);
+        
+        JPanel panelPantalla = new JPanel();
+        panelPantalla.setLayout(new BoxLayout(panelPantalla, BoxLayout.X_AXIS));
+        panelPantalla.add(pantalla);
+        panelPantalla.add(borrar);
+        panelPantalla.setBackground(pantalla.getBackground());
+        panelPantalla.setBorder(pantalla.getBorder());
+        pantalla.setBorder(null);
+
         lineaPantalla.add(llamar);
-        lineaPantalla.add(pantalla);
+        lineaPantalla.add(panelPantalla);
+
+
+
         JPanel linea1 = new JPanel();
         linea1.setLayout(new BoxLayout(linea1,BoxLayout.X_AXIS));
         uno = new JButton("1");
@@ -119,6 +139,10 @@ public class Teclado extends JPanel {
         llamar.addActionListener(listener);
     }
 
+    public void addDelListener(ActionListener listener) {
+        borrar.addActionListener(listener);
+    }
+
     public void addTextInput(String text) {
         String backup = pantalla.getText();
         pantalla.setText(backup+text);
@@ -126,5 +150,10 @@ public class Teclado extends JPanel {
 
     public String getNumeroPantalla() {
         return pantalla.getText();
+    }
+
+    public void delTextoPantalla() {
+        String backup = pantalla.getText();
+        pantalla.setText(backup.substring(backup.length()-backup.length()+1));
     }
 }

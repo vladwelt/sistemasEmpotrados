@@ -35,10 +35,24 @@ public class Controlador {
             }
         });
 
+        sistema.addDelActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent event) {
+                sistema.delTexto();
+            }
+        });
+
         sistema.addLlamarActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
-                System.out.println("LLAMADA!!");
                 sistema.addPanelLlamada();
+                addLlamadaEvent();
+            }
+        });
+    }
+
+    public void addLlamadaEvent() {
+        sistema.addColgarActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                sistema.addPanelTeclado();
             }
         });
     }

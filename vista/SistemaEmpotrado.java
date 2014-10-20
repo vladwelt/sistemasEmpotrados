@@ -15,6 +15,7 @@ public class SistemaEmpotrado extends JFrame {
 
     public SistemaEmpotrado(String nombre) {
         super(nombre);
+        teclado = new Teclado();
         JPanel botones = new JPanel();
         botones.setLayout(new BoxLayout(botones,BoxLayout.PAGE_AXIS));
         buttonOne = new JButton("1 min");
@@ -46,9 +47,16 @@ public class SistemaEmpotrado extends JFrame {
         teclado.addLlamarListener(listener);
     }
 
+    public void addColgarActionListener(ActionListener listener) {
+        llamada.addButtonColgarListener(listener);
+    }
+
+    public void addDelActionListener( ActionListener listener) {
+        teclado.addDelListener(listener);
+    }
+
     public void addPanelTeclado() {
         getContentPane().removeAll();
-        teclado = new Teclado();
         getContentPane().add(teclado);
         this.revalidate();
     }
@@ -66,6 +74,11 @@ public class SistemaEmpotrado extends JFrame {
         System.out.println(teclado.getNumeroPantalla());
         llamada = new Llamada(teclado.getNumeroPantalla());
         getContentPane().add(llamada);
+        this.validate();
         this.revalidate();
+    }
+    
+    public void delTexto() {
+        teclado.delTextoPantalla();
     }
 }
