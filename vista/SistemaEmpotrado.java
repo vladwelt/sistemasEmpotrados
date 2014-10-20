@@ -63,6 +63,7 @@ public class SistemaEmpotrado extends JFrame {
 
     public void addPanelLlamada() {
         getContentPane().removeAll();
+        System.out.println(teclado.getNumeroPantalla());
         llamada = new Llamada(teclado.getNumeroPantalla());
         getContentPane().add(llamada);
         this.revalidate();
