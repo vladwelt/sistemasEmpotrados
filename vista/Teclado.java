@@ -154,6 +154,6 @@ public class Teclado extends JPanel {
 
     public void delTextoPantalla() {
         String backup = pantalla.getText();
-        pantalla.setText(backup.substring(backup.length()-backup.length()+1));
+        pantalla.setText(backup.substring(0, backup.length()-1));
     }
 }
