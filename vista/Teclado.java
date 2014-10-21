@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
 
 public class Teclado extends JPanel {
     
@@ -32,6 +34,20 @@ public class Teclado extends JPanel {
         pantalla = new JTextField();
         pantalla.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
         pantalla.setFont(new Font("Arial",Font.PLAIN,70));
+        pantalla.addKeyListener(new KeyListener(){
+            public void keyReleased(KeyEvent e){
+                System.out.println("keyreleased");
+            }
+            
+            public void keyPressed(KeyEvent e) {
+                System.out.println("keypressed");
+            }
+            
+            public void keyTyped(KeyEvent e) {
+                System.out.println("keyTyped");
+            }
+        });
+        pantalla.setEditable(false);
 
         llamar = new JButton("");
         llamar.setMaximumSize(new Dimension(200, Integer.MAX_VALUE));
@@ -53,8 +69,6 @@ public class Teclado extends JPanel {
 
         lineaPantalla.add(llamar);
         lineaPantalla.add(panelPantalla);
-
-
 
         JPanel linea1 = new JPanel();
         linea1.setLayout(new BoxLayout(linea1,BoxLayout.X_AXIS));
@@ -145,7 +159,9 @@ public class Teclado extends JPanel {
 
     public void addTextInput(String text) {
         String backup = pantalla.getText();
-        pantalla.setText(backup+text);
+        if(backup.length()<8) {
+            pantalla.setText(backup+text);
+        }
     }
 
     public String getNumeroPantalla() {
@@ -154,6 +170,7 @@ public class Teclado extends JPanel {
 
     public void delTextoPantalla() {
         String backup = pantalla.getText();
-        pantalla.setText(backup.substring(0, backup.length()-1));
+        if(backup.length()>0)
+            pantalla.setText(backup.substring(0, backup.length()-1));
     }
 }

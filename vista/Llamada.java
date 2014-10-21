@@ -7,6 +7,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionListener;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Llamada extends JPanel {
 
@@ -14,8 +16,11 @@ public class Llamada extends JPanel {
     private JLabel tiempo;
     private JLabel llamada;
     private JButton iconoLlamada;
+    private int contador;
+    private Timer uno;
 
     public Llamada(String numero) {
+        contador = 1;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBackground(new Color(101, 188, 84));
         setOpaque(true);
@@ -47,5 +52,9 @@ public class Llamada extends JPanel {
 
     public void addButtonColgarListener(ActionListener listener) {
         colgar.addActionListener(listener);
+    }
+
+    public void setText(String text) {
+        tiempo.setText(text);
     }
 }

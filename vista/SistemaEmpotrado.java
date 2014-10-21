@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 
+
 public class SistemaEmpotrado extends JFrame {
 
     private JButton buttonOne;
@@ -59,6 +60,7 @@ public class SistemaEmpotrado extends JFrame {
         getContentPane().removeAll();
         getContentPane().add(teclado);
         this.revalidate();
+        this.repaint();
     }
 
     public void addTecladoActionListener(ActionListener listener) {
@@ -74,8 +76,23 @@ public class SistemaEmpotrado extends JFrame {
         System.out.println(teclado.getNumeroPantalla());
         llamada = new Llamada(teclado.getNumeroPantalla());
         getContentPane().add(llamada);
-        this.validate();
+        this.repaint();
         this.revalidate();
+        Thread uno = new Thread(){
+         
+          public void run() {
+            
+            for(int i=1; i< 10; i++) {
+                llamada.setText("00:0"+i);
+                System.out.println("00:0"+i);
+                try {
+                sleep(1000);
+                } catch(Exception e) { }
+            }
+            addPanelTeclado();
+          }
+        };
+        uno.start();
     }
     
     public void delTexto() {
