@@ -1,47 +1,35 @@
 package sistemasEmpotrados.vista;
 
 import javax.swing.*;
-import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.event.ActionListener;
 
 
 public class SistemaEmpotrado extends JFrame {
 
-    private JButton buttonOne;
-    private JButton buttonThree;
-    private JButton buttonFive;
     private Teclado teclado;
     private Llamada llamada;
+    private Cobrar cobrador;
+    private int tiempo;
 
     public SistemaEmpotrado(String nombre) {
         super(nombre);
+        cobrador = new Cobrar();
         teclado = new Teclado();
-        JPanel botones = new JPanel();
-        botones.setLayout(new BoxLayout(botones,BoxLayout.PAGE_AXIS));
-        buttonOne = new JButton("1 min");
-        buttonOne.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
-        buttonOne.setFont(new Font("Arial", Font.PLAIN, 70));
-        buttonThree = new JButton("3 min");
-        buttonThree.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
-        buttonThree.setFont(new Font("Arial", Font.PLAIN, 70));
-        buttonFive = new JButton("5 min");
-        buttonFive.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
-        buttonFive.setFont(new Font("Arial", Font.PLAIN, 70));
-        botones.add(buttonOne);
-        botones.add(buttonThree);
-        botones.add(buttonFive);
-        //addPanelLlamada();
-        add(botones);
+        tiempo = 0;
+
+        add(cobrador);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
 
+    public void setTiempoLlamada(int _tiempo) {
+        tiempo = _tiempo;
+        System.out.println("TIEMPO: "+ _tiempo);
+    }
+
     public void addButtonActionListener(ActionListener listener) {
-        buttonOne.addActionListener(listener);
-        buttonThree.addActionListener(listener);
-        buttonFive.addActionListener(listener);
+        cobrador.addButtonListener(listener);
     }
 
     public void addLlamarActionListener(ActionListener listener) {

@@ -15,6 +15,14 @@ public class Controlador {
 
         sistema.addButtonActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent event) {
+                 int tiempoDefinido = Integer.parseInt(((JButton)event.getSource()).getText().substring(0,1));
+                 if(tiempoDefinido == 1)
+                     sistema.setTiempoLlamada(1);
+                 else if(tiempoDefinido == 3)
+                     sistema.setTiempoLlamada(3);
+                 else
+                     sistema.setTiempoLlamada(5);
+
                  sistema.addPanelTeclado();
                  addTecladoEvent();
             }
