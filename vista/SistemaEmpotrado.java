@@ -2,7 +2,7 @@ package sistemasEmpotrados.vista;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
-
+import java.awt.CardLayout;
 
 public class SistemaEmpotrado extends JFrame {
 
@@ -15,14 +15,27 @@ public class SistemaEmpotrado extends JFrame {
     private boolean terminar;
     private int minutos;
     private int segundos;
+    private JPanel pantallas;
+    private final static String COBRADOR = "selecciona monto";
+    private final static String DETECTOR = "detecta monedas";
+    private final static String TECLADO = "teclado";
+    private final static String LLAMADA = "llamado";
 
     public SistemaEmpotrado(String nombre) {
         super(nombre);
+        pantallas = new JPanel(new CardLayout());
         cobrador = new Cobrar();
         teclado = new Teclado();
         detector = new DetectorMoneda();
+        llamada = new Llamada();
+        pantallas.add(cobrador, COBRADOR);
+        pantallas.add(detector, DETECTOR);
+        pantallas.add(teclado, TECLADO);
+        pantallas.add(llamada, LLAMADA);
+        add(pantallas);
+        
         tiempo = minutos = segundos = 0;
-        add(cobrador);
+        //add(cobrador);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
@@ -50,10 +63,8 @@ public class SistemaEmpotrado extends JFrame {
     }
 
     public void addPanelTeclado() {
-        getContentPane().removeAll();
-        getContentPane().add(teclado);
-        this.revalidate();
-        this.repaint();
+        CardLayout cl = (CardLayout)(pantallas.getLayout());
+        cl.show(pantallas, TECLADO);
     }
 
     public void addTecladoActionListener(ActionListener listener) {
@@ -65,13 +76,9 @@ public class SistemaEmpotrado extends JFrame {
     }
 
     public void addPanelLlamada() {
-        getContentPane().removeAll();
-        System.out.println(teclado.getNumeroPantalla());
-        llamada = new Llamada(teclado.getNumeroPantalla());
-        getContentPane().add(llamada);
-        this.repaint();
-        this.revalidate();
-        System.out.println("FINAL");
+        CardLayout c1 = (CardLayout)(pantallas.getLayout());
+        c1.show(pantallas, LLAMADA);
+        llamada.setNumero(teclado.getNumeroPantalla());
         terminar=false;
         hiloTiempo = new Thread(){ 
             public void run() {
@@ -108,10 +115,8 @@ public class SistemaEmpotrado extends JFrame {
 
     public void addCobrarLlamada() {
         minutos=segundos=0;
-        getContentPane().removeAll();
-        getContentPane().add(cobrador);
-        this.repaint();
-        this.revalidate();
+        CardLayout c1 = (CardLayout)pantallas.getLayout();
+        c1.show(pantallas, COBRADOR);
     }
     
     public void delTexto() {
@@ -123,10 +128,8 @@ public class SistemaEmpotrado extends JFrame {
     }
 
     public void addDetectarMoneda() {
-        getContentPane().removeAll();
-        getContentPane().add(detector);
-        this.repaint();
-        this.revalidate();
+        CardLayout c1 = (CardLayout)pantallas.getLayout();
+        c1.show(pantallas, DETECTOR);
     }
 
     public void addInsertarActionListener(ActionListener listener) {

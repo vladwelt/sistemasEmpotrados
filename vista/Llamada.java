@@ -19,7 +19,7 @@ public class Llamada extends JPanel {
     private int contador;
     private Timer uno;
 
-    public Llamada(String numero) {
+    public Llamada() {
         contador = 1;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBackground(new Color(101, 188, 84));
@@ -31,7 +31,7 @@ public class Llamada extends JPanel {
         iconoLlamada.setBorderPainted(false);
         iconoLlamada.setBackground(new Color(101, 188, 84));
 
-        llamada = new JLabel("Llamando  a   " + numero);
+        llamada = new JLabel("");
         llamada.setFont(new Font("Arial", Font.PLAIN, 70));
 
         tiempo = new JLabel("00:00");
@@ -56,5 +56,9 @@ public class Llamada extends JPanel {
 
     public void setText(String text) {
         tiempo.setText(text);
+    }
+
+    public void setNumero(String numero) {
+        llamada.setText("Llamando a  " + numero);
     }
 }
