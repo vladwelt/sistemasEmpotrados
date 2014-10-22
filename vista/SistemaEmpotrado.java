@@ -10,13 +10,16 @@ public class SistemaEmpotrado extends JFrame {
     private Llamada llamada;
     private Cobrar cobrador;
     private int tiempo;
+    private Thread hiloTiempo;
+    private boolean terminar;
+    private int minutos;
+    private int segundos;
 
     public SistemaEmpotrado(String nombre) {
         super(nombre);
         cobrador = new Cobrar();
         teclado = new Teclado();
-        tiempo = 0;
-
+        tiempo = minutos = segundos = 0;
         add(cobrador);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -66,24 +69,54 @@ public class SistemaEmpotrado extends JFrame {
         getContentPane().add(llamada);
         this.repaint();
         this.revalidate();
-        Thread uno = new Thread(){
-         
-          public void run() {
-            
-            for(int i=1; i< 10; i++) {
-                llamada.setText("00:0"+i);
-                System.out.println("00:0"+i);
-                try {
-                sleep(1000);
-                } catch(Exception e) { }
+        System.out.println("FINAL");
+        terminar=false;
+        hiloTiempo = new Thread(){ 
+            public void run() {
+                for(int i=minutos; i< tiempo; i++) {
+                    for(int j=segundos ; j<60 ; j++) {
+                        if(j<=9) {
+                            llamada.setText("0"+i+":0"+j);
+                            System.out.println("0"+i+":0"+j);
+                        }
+                        else{
+                            llamada.setText("0"+i+":"+j);
+                            System.out.println("0"+i+":0"+j);
+                        }
+                        try {
+                            sleep(1000);
+                        }
+                        catch(Exception e) { }
+                        if(terminar)
+                        {
+                            minutos=i;
+                            segundos=j;
+                            break;
+                        }
+                    }
+                }
+                if(terminar)
+                    addPanelTeclado();
+                else
+                    addCobrarLlamada();
             }
-            addPanelTeclado();
-          }
         };
-        uno.start();
+        hiloTiempo.start();
+    }
+
+    public void addCobrarLlamada() {
+        minutos=segundos=0;
+        getContentPane().removeAll();
+        getContentPane().add(cobrador);
+        this.repaint();
+        this.revalidate();
     }
     
     public void delTexto() {
         teclado.delTextoPantalla();
+    }
+    
+    public void pararTiempo() {
+        terminar=true;
     }
 }

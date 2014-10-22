@@ -34,19 +34,6 @@ public class Teclado extends JPanel {
         pantalla = new JTextField();
         pantalla.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
         pantalla.setFont(new Font("Arial",Font.PLAIN,70));
-        pantalla.addKeyListener(new KeyListener(){
-            public void keyReleased(KeyEvent e){
-                System.out.println("keyreleased");
-            }
-            
-            public void keyPressed(KeyEvent e) {
-                System.out.println("keypressed");
-            }
-            
-            public void keyTyped(KeyEvent e) {
-                System.out.println("keyTyped");
-            }
-        });
         pantalla.setEditable(false);
 
         llamar = new JButton("");

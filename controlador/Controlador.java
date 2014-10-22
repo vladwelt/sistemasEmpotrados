@@ -39,7 +39,6 @@ public class Controlador {
                     System.out.println("ERROR");
                 }
                 sistema.addText(nuevo.getText());
-
             }
         });
 
@@ -61,6 +60,7 @@ public class Controlador {
         sistema.addColgarActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 sistema.addPanelTeclado();
+                sistema.pararTiempo();
             }
         });
     }
