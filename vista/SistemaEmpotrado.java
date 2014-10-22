@@ -9,6 +9,7 @@ public class SistemaEmpotrado extends JFrame {
     private Teclado teclado;
     private Llamada llamada;
     private Cobrar cobrador;
+    private DetectorMoneda detector;
     private int tiempo;
     private Thread hiloTiempo;
     private boolean terminar;
@@ -19,6 +20,7 @@ public class SistemaEmpotrado extends JFrame {
         super(nombre);
         cobrador = new Cobrar();
         teclado = new Teclado();
+        detector = new DetectorMoneda();
         tiempo = minutos = segundos = 0;
         add(cobrador);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -118,5 +120,20 @@ public class SistemaEmpotrado extends JFrame {
     
     public void pararTiempo() {
         terminar=true;
+    }
+
+    public void addDetectarMoneda() {
+        getContentPane().removeAll();
+        getContentPane().add(detector);
+        this.repaint();
+        this.revalidate();
+    }
+
+    public void addInsertarActionListener(ActionListener listener) {
+        detector.addInsertarListener(listener);
+    }
+
+    public void addCancelarActionListener(ActionListener listener) {
+        detector.addCancelarListener(listener);
     }
 }

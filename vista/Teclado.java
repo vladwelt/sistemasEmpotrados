@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
+import java.awt.*;
 
 public class Teclado extends JPanel {
     
@@ -28,25 +29,24 @@ public class Teclado extends JPanel {
 
     public Teclado() {
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-
+        
         JPanel lineaPantalla = new JPanel();
         lineaPantalla.setLayout(new BoxLayout(lineaPantalla, BoxLayout.X_AXIS));
         pantalla = new JTextField();
-        pantalla.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
+        pantalla.setMaximumSize(new Dimension(Integer.MAX_VALUE, 200));
         pantalla.setFont(new Font("Arial",Font.PLAIN,70));
         pantalla.setEditable(false);
 
         llamar = new JButton("");
-        llamar.setMaximumSize(new Dimension(200, Integer.MAX_VALUE));
+        llamar.setMaximumSize(new Dimension(200, 200));
         //llamar.setFont(new Font("Arial",Font.PLAIN,70));
         llamar.setIcon(new javax.swing.ImageIcon(getClass().getResource("../images/call6.png")));
-
         borrar = new JButton();
         borrar.setIcon(new ImageIcon(getClass().getResource("../images/delete2.png")));
         borrar.setBorderPainted(false);
         borrar.setBackground(null);
         
-        JPanel panelPantalla = new JPanel();
+         JPanel panelPantalla = new JPanel();
         panelPantalla.setLayout(new BoxLayout(panelPantalla, BoxLayout.X_AXIS));
         panelPantalla.add(pantalla);
         panelPantalla.add(borrar);
@@ -57,68 +57,63 @@ public class Teclado extends JPanel {
         lineaPantalla.add(llamar);
         lineaPantalla.add(panelPantalla);
 
-        JPanel linea1 = new JPanel();
-        linea1.setLayout(new BoxLayout(linea1,BoxLayout.X_AXIS));
+        JPanel tabla = new JPanel(new GridLayout(0,3));
+        //tabla.setLayout(new BoxLayout(tabla,BoxLayout.X_AXIS));
         uno = new JButton("1");
         uno.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
         uno.setFont(new Font("Arial",Font.PLAIN,70));
-        linea1.add(uno);
+        tabla.add(uno);
         dos = new JButton("2");
         dos.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
         dos.setFont(new Font("Arial",Font.PLAIN,70));
-        linea1.add(dos);
+        tabla.add(dos);
         tres = new JButton("3");
         tres.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
         tres.setFont(new Font("Arial",Font.PLAIN,70));
-        linea1.add(tres);
-        JPanel linea2 = new JPanel();
-        linea2.setLayout(new BoxLayout(linea2,BoxLayout.X_AXIS));
+        tabla.add(tres);
+
         cuatro = new JButton("4");
         cuatro.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
         cuatro.setFont(new Font("Arial",Font.PLAIN,70));
-        linea2.add(cuatro);
+        tabla.add(cuatro);
         cinco = new JButton("5");
         cinco.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
         cinco.setFont(new Font("Arial",Font.PLAIN,70));
-        linea2.add(cinco);
+        tabla.add(cinco);
         seis = new JButton("6");
         seis.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
         seis.setFont(new Font("Arial",Font.PLAIN,70));
-        linea2.add(seis);
-        JPanel linea3 = new JPanel();
-        linea3.setLayout(new BoxLayout(linea3,BoxLayout.X_AXIS));
+        tabla.add(seis);
+
         siete = new JButton("7");
         siete.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
         siete.setFont(new Font("Arial",Font.PLAIN,70));
-        linea3.add(siete);
+        tabla.add(siete);
         ocho = new JButton("8");
         ocho.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
         ocho.setFont(new Font("Arial",Font.PLAIN,70));
-        linea3.add(ocho);
+        tabla.add(ocho);
         nueve = new JButton("9");
         nueve.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
         nueve.setFont(new Font("Arial",Font.PLAIN,70));
-        linea3.add(nueve);
-        JPanel linea4 = new JPanel();
-        linea4.setLayout(new BoxLayout(linea4,BoxLayout.X_AXIS));
+        tabla.add(nueve);
+
         asterisco = new JButton("*");
         asterisco.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
         asterisco.setFont(new Font("Arial",Font.PLAIN,70));
-        linea4.add(asterisco);
+        tabla.add(asterisco);
+
         cero = new JButton("0");
         cero.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
         cero.setFont(new Font("Arial",Font.PLAIN,70));
-        linea4.add(cero);
+        tabla.add(cero);
         numeral = new JButton("#");
         numeral.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
         numeral.setFont(new Font("Arial",Font.PLAIN,70));
-        linea4.add(numeral);
+        tabla.add(numeral);
 
         add(lineaPantalla);
-        add(linea1);
-        add(linea2);
-        add(linea3);
-        add(linea4);
+        add(tabla);
     }
 
     public void addButtonListener(ActionListener listener) {

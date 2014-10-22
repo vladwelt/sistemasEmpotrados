@@ -22,14 +22,22 @@ public class Controlador {
                      sistema.setTiempoLlamada(3);
                  else
                      sistema.setTiempoLlamada(5);
-
-                 sistema.addPanelTeclado();
-                 addTecladoEvent();
+                 sistema.addDetectarMoneda();
             }
         });
-    }
 
-    public void addTecladoEvent() {   
+        sistema.addInsertarActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                sistema.addPanelTeclado();
+            }
+        });
+
+        sistema.addCancelarActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                sistema.addCobrarLlamada();
+            }
+        });
+
         sistema.addTecladoActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 JButton nuevo = new JButton();
