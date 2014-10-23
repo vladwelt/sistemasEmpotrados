@@ -1,6 +1,7 @@
 package sistemasEmpotrados.controlador;
 
 import sistemasEmpotrados.vista.*;
+import sistemasEmpotrados.modelo.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,9 +10,11 @@ import javax.swing.JButton;
 public class Controlador {
 
     SistemaEmpotrado sistema;
+    OperacionAT operador;
 
-    public Controlador(SistemaEmpotrado _sistema) {
+    public Controlador(SistemaEmpotrado _sistema, OperacionAT _operador) {
         this.sistema = _sistema;
+        this.operador = _operador;
 
         sistema.addButtonActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent event) {
@@ -60,6 +63,8 @@ public class Controlador {
             public void actionPerformed(ActionEvent event) {
                 sistema.addPanelLlamada();
                 addLlamadaEvent();
+                operador.abrirPuerto();
+                operador.llamar(sistema.getNumero());
             }
         });
     }
@@ -69,6 +74,8 @@ public class Controlador {
             public void actionPerformed(ActionEvent event) {
                 sistema.addPanelTeclado();
                 sistema.pararTiempo();
+                operador.colgar();
+                operador.cerrarPuerto();
             }
         });
     }

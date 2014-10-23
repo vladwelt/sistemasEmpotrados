@@ -3,6 +3,7 @@ package sistemasEmpotrados.vista;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.CardLayout;
+import sistemasEmpotrados.modelo.OperacionAT;
 
 public class SistemaEmpotrado extends JFrame {
 
@@ -20,9 +21,11 @@ public class SistemaEmpotrado extends JFrame {
     private final static String DETECTOR = "detecta monedas";
     private final static String TECLADO = "teclado";
     private final static String LLAMADA = "llamado";
+    private OperacionAT operador;
 
-    public SistemaEmpotrado(String nombre) {
+    public SistemaEmpotrado(String nombre, OperacionAT _operador) {
         super(nombre);
+        operador = _operador;
         pantallas = new JPanel(new CardLayout());
         cobrador = new Cobrar();
         teclado = new Teclado();
@@ -44,6 +47,10 @@ public class SistemaEmpotrado extends JFrame {
     public void setTiempoLlamada(int _tiempo) {
         tiempo = _tiempo;
         System.out.println("TIEMPO: "+ _tiempo);
+    }
+
+    public String getNumero() {
+        return teclado.getNumeroPantalla();
     }
 
     public void addButtonActionListener(ActionListener listener) {
@@ -107,7 +114,11 @@ public class SistemaEmpotrado extends JFrame {
                 if(terminar)
                     addPanelTeclado();
                 else
+                {
                     addCobrarLlamada();
+                    operador.colgar();
+                    operador.cerrarPuerto();
+                }
             }
         };
         hiloTiempo.start();

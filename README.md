@@ -1,6 +1,6 @@
 cd sistemasEmpotrados
 
-javac -d classes -classpath library/quaqua.jar vista/*.java controlador/*.java Inicio.java
+javac -d classes -classpath library/quaqua.jar:library/RXTXcomm.jar vista/*.java controlador/*.java modelo/*.java Inicio.java
 
 cd classes
 

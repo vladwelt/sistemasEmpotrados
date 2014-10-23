@@ -2,6 +2,7 @@ package sistemasEmpotrados;
 
 import sistemasEmpotrados.vista.*;
 import sistemasEmpotrados.controlador.*;
+import sistemasEmpotrados.modelo.*;
 import javax.swing.UIManager;
 import ch.randelshofer.quaqua.*;
 
@@ -16,8 +17,9 @@ public class Inicio {
         catch (Exception e) {
             System.out.println("Not working");
         }                       
-        SistemaEmpotrado cobrador = new SistemaEmpotrado("nuevo");
-        Controlador control = new Controlador(cobrador);
 
+        OperacionAT operador = new OperacionAT("/dev/ttyUSB0");
+        SistemaEmpotrado cobrador = new SistemaEmpotrado("nuevo", operador);
+        Controlador control = new Controlador(cobrador,operador);
     }
 }
